@@ -2,10 +2,11 @@
     <div class="bg-dark">
         <div class="container">
             <div class="pt-5 pb-2 px-1">
-                <div class="row">
-                    <div class="col-md-2" v-for="(comic, i) in comicsList" :key="i">
-                        <TheCard :comic-title="comic.series" :url-img="comic.thumb" :comic-price="comic.price"
-                            :comic-type="comic.type"></TheCard>
+                <div class="row row-cols-2 row-cols-md-5">
+                    <div class="col" v-for="(disc, i) in discsList" :key="i">
+                        <TheCard :info="disc"></TheCard>
+
+
                     </div>
                 </div>
                 <div>
@@ -18,12 +19,15 @@
 
 <script>
 import axios from "axios";
+import TheCard from "./TheCard.vue";
 
 
 
 export default {
     name: 'CardsList',
+
     components: {
+        TheCard,
     },
     data() {
         return {
