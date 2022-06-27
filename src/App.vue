@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TheHeader :lista-generi="listaGeneri" @searchGenre="onSearchGenre"></TheHeader>
-    <CardsList @genresUpdated="onGenresUpdated" :search-genre="searchGenre"></CardsList>
+    <CardsList @genresUpdated="onGenresUpdate" :search-genre="searchGenre"></CardsList>
   </div>
 </template>
 
@@ -14,10 +14,7 @@ import TheHeader from "./components/TheHeader.vue";
 
 export default {
   name: 'App',
-  components: {
-
-    CardsList, TheHeader,
-  },
+  components: { CardsList, TheHeader, },
   data() {
     return {
       listaGeneri: [],
@@ -26,7 +23,7 @@ export default {
 
   },
   methods: {
-    onGenresUpdated(listaGeneri) {
+    onGenresUpdate(listaGeneri) {
       console.log("listaGeneri: ", listaGeneri);
       this.listaGeneri = listaGeneri;
     },

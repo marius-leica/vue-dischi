@@ -3,10 +3,10 @@
 
         <div class="container flex-grow-1">
             <div class="pt-5 pb-2 px-1">
-                <div class="alert alert-info"> genere attivo: {{ searchGenre }}</div>
+                <div class="alert alert-info"> genere attivo: {{ genereSelezionato }}</div>
                 <div class="row row-cols-2 row-cols-md-5">
-                    <div class="col" v-for="(disc, i) in filteredAlbums" :key="i">
-                        <TheCard class="h-100" :info="disc"></TheCard>
+                    <div class="col" v-for="(disc, i) in filteredDiscs" :key="i">
+                        <TheCard class="h-100" :disc="disc"></TheCard>
 
 
                     </div>
@@ -22,14 +22,18 @@
 <script>
 import axios from "axios";
 import TheCard from "./TheCard.vue";
+import { state } from "../store";
 
 
 
 export default {
     name: 'CardsList',
-    props: {
-        searchGenre: String
+    components: {
+        TheCard,
     },
+    // props: {
+    //     searchGenre: String
+    // },
     data() {
         return {
             apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
@@ -41,21 +45,24 @@ export default {
         }
     },
     computed: {
-        filteredAlbums() {
-            if (!this.searchGenre) {
+        filteredDiscs() {
+            if (!state.genereSelezionato) {
                 return this.discsList;
             }
             return this.discsList.filter(disc => {
-                return disc.genre === this.searchGenre;
+                return disc.genre === state.genereSelezionato;
             });
-        }
+        },
+        genereSelezionato() {
+            return state.genereSelezionato;
+        },
     },
     methods: {
         fetchDiscsList() {
             axios.get(this.apiURL,).then((resp) => {
                 this.discsList = resp.data.response;
-
-                this.$emit("genresUpdated", this.listaGeneri())
+                state.listaGeneri = this.listaGeneri();
+                // this.$emit("genresUpdated", this.listaGeneri())
             })
                 .catch(() => {
                     alert("Errore");
@@ -72,9 +79,7 @@ export default {
             /* adesso vogliamo passare questo dato con EMIT a app.vue e da li con PROP a TheHeader.vue e poi TheSearch.vue */
         }
     },
-    components: {
-        TheCard,
-    },
+
 
 
     mounted() {

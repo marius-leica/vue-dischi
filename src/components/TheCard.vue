@@ -1,13 +1,13 @@
 <template>
     <div class="card text-center">
 
-        <img :src="info.poster" :alt="`cover of ${info.title}`" class="card-img-top img-poster " />
+        <img :src="disc.poster" :alt="`cover of ${disc.title}`" class="card-img-top img-poster " />
         <div class="card-body">
-            <h5 class="card-title text-white">{{ info.title }}</h5>
+            <h5 class="card-title text-white">{{ disc.title }}</h5>
             <div class="text-muted">
-                <h6>{{ info.author }}</h6>
+                <h6>{{ disc.author }}</h6>
             </div>
-            <div class="text-muted"><span class="fs-6"> {{ info.year }}</span></div>
+            <div class="text-muted"><span class="fs-6"> {{ disc.year }}</span></div>
 
         </div>
 
@@ -18,7 +18,7 @@
 export default {
     name: 'TheCard',
     props: {
-        info: {
+        disc: {
             type: Object,
             required: true,
         },

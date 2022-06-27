@@ -6,7 +6,7 @@
                     <img :src="require('../assets/spotify_logo.jpg')" alt="spotify logo" width="70" height="70" />
                 </a>
 
-                <TheSelect class="ms-auto" :lista-generi="listaGeneri" @searchGenre="$emit('searchGenre', $event)">
+                <TheSelect class="ms-auto" @searchGenre="$emit('searchGenre', $event)">
                 </TheSelect>
 
             </div>
@@ -19,18 +19,19 @@
 import TheSelect from "./TheSelect.vue";
 export default {
     name: 'TheHeader',
-    props: {
-        listaGeneri: Array
-    },
     components: {
         TheSelect,
     },
+    // props: {
+    //     listaGeneri: Array
+    // },
 
-    methods: {
-        filtreGenre(genre) {
-            this.$emit('selectGenre', genre);
-        }
-    },
+
+    // methods: {
+    //     filtreGenre(genre) {
+    //         this.$emit('selectGenre', genre);
+    //     }
+    // },
 }
 </script>
 
