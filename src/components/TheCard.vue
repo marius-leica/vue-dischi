@@ -1,9 +1,9 @@
 <template>
     <div class="card text-center">
 
-        <img :src="info.poster" :alt="`cover of ${info.title}`" class="card-img-top img-poster" />
+        <img :src="info.poster" :alt="`cover of ${info.title}`" class="card-img-top img-poster " />
         <div class="card-body">
-            <h6 class="card-title">{{ info.title }}</h6>
+            <h5 class="card-title text-white">{{ info.title }}</h5>
             <div class="text-muted">
                 <h6>{{ info.author }}</h6>
             </div>
@@ -18,7 +18,11 @@
 export default {
     name: 'TheCard',
     props: {
-        info: Object
+        info: {
+            type: Object,
+            required: true,
+        },
+
     },
     components: {
     }
@@ -26,4 +30,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./src/assets/scss/main.scss";
+
+.card {
+    border-radius: 0;
+    background-color: $grey_color;
+    height: 100%;
+    margin-bottom: 1rem;
+}
+
+.img-poster {
+    border-radius: 0;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 </style>

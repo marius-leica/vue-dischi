@@ -1,33 +1,43 @@
 <template>
   <div id="app">
-    <TheHeader></TheHeader>
-    <CardsList></CardsList>
+    <TheHeader :lista-generi="listaGeneri" @searchGenre="onSearchGenre"></TheHeader>
+    <CardsList @genresUpdated="onGenresUpdated" :search-genre="searchGenre"></CardsList>
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue";
+
 import CardsList from "./components/CardsList.vue";
+import TheHeader from "./components/TheHeader.vue";
+
 
 
 export default {
   name: 'App',
   components: {
-    TheHeader,
-    CardsList,
-  }
+
+    CardsList, TheHeader,
+  },
+  data() {
+    return {
+      listaGeneri: [],
+      searchGenre: "",
+    }
+
+  },
+  methods: {
+    onGenresUpdated(listaGeneri) {
+      console.log("listaGeneri: ", listaGeneri);
+      this.listaGeneri = listaGeneri;
+    },
+    onSearchGenre(genre) {
+      console.log("genre: ", genre);
+      this.searchGenre = genre;
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  background-color: rgb(30, 45, 59);
-  height: 100vh;
-}
 </style>
